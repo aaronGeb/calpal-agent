@@ -14,6 +14,7 @@ CalPal is a command-line intelligent scheduling assistant that uses AI agents to
 CalPal uses a system of specialized agents that work together to complete the scheduling task.
 
 ```mermaid
+
 graph TD
     A[User Input<br>Natural Language Request] --> B(Parser Agent)
     B -- "Structured JSON Data<br>attendees, topic, duration, time_constraint" --> C{Scheduler Agent<br>Orchestrator}
@@ -24,6 +25,21 @@ graph TD
     F -- "Event Created" --> G[Success Message]
     E -- "No" --> H[Cancel Message]
 ```
+**1. Parser Agent**: Uses Google's Gemini Pro to convert the user's natural language input into structured JSON data.
+
+**2. Scheduler Agent (Orchestrator)**: The main agent that receives the parsed data and coordinates the scheduling workflow.
+
+**3. Calendar Agent**: Handles Google Calendar operations including:
+   - `find_available_slots()`: Find available meeting times
+   - `create_event()`: Book the event on the calendar
+
+## 🛠️ Technology Stack
+
+- **Framework**: LangChain
+- **LLM**: Google Gemini Pro
+- **Calendar API**: Google Calendar API
+- **Language**: Python 3.8+
+- **Authentication**: OAuth 2.0
 
 ## 🚀 Quick Start
 
@@ -33,7 +49,8 @@ graph TD
    ```bash
    git clone https://github.com/aaronGeb/calpal-agent.git
    cd calpal-agent
-   ./install.sh
+   chmod +x scripts/install.sh
+   ./scripts/install.sh
    ```
 
 2. **Set up your API keys:**
@@ -46,10 +63,31 @@ graph TD
    # Place it in the CalPal directory
    ```
 
-3. **Run your first meeting:**
+2. **Run your first meeting:**
    ```bash
    calpal schedule "Lunch with Alex next Thursday at 1pm"
    ```
+
+## 📁 Project Structure
+
+```
+calpal-agent/
+├── calpal/                    # Main package
+│   ├── core/                  # Core functionality
+│   │   ├── models.py          # Data models
+│   │   ├── parser_agent.py    # Natural language parsing
+│   │   ├── calendar_agent.py  # Google Calendar integration
+│   │   └── scheduler_agent.py # Workflow orchestration
+│   ├── utils/                 # Utility functions
+│   ├── exceptions/            # Custom exceptions
+│   └── cli.py                 # Command-line interface
+├── tests/                     # Test suite
+├── examples/                  # Usage examples
+├── docs/                      # Documentation
+├── config/                    # Configuration files
+├── scripts/                   # Build and utility scripts
+└── requirements.txt           # Python dependencies
+```
 
 ### Usage Examples
 
@@ -83,7 +121,75 @@ calpal --help
 
 CalPal is built with a clean, modular architecture:
 
-- **Parser Agent**: Converts natural language to structured data
-- **Calendar Agent**: Handles Google Calendar operations
-- **Scheduler Agent**: Orchestrates the workflow
+- **Parser Agent**: Converts natural language to structured data using Google Gemini Pro
+- **Calendar Agent**: Handles Google Calendar operations and availability checking
+- **Scheduler Agent**: Orchestrates the complete scheduling workflow
 - **CLI Interface**: User-friendly command-line interface
+- **Core Models**: Type-safe data models for meetings, time slots, and events
+
+## 🧪 Testing
+
+Run the test suite to verify everything is working:
+
+```bash
+# Run all tests
+python tests/test_calpal.py
+
+# Run parsing tests specifically
+python tests/test_parsing.py
+
+# Run with pytest (if installed)
+pytest tests/
+```
+
+## 📚 Documentation
+
+- **[API Documentation](docs/API.md)** - Complete API reference
+- **[Development Guide](docs/DEVELOPMENT.md)** - Development setup and guidelines
+- **[Examples](examples/)** - Usage examples and code samples
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Run tests: `python tests/test_calpal.py`
+5. Commit your changes: `git commit -m 'Add amazing feature'`
+6. Push to the branch: `git push origin feature/amazing-feature`
+7. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**1. "GOOGLE_GENERATIVE_AI_API_KEY is required"**
+- Make sure you've set the environment variable: `export GOOGLE_GENERATIVE_AI_API_KEY="your-key"`
+- Or create a `.env` file with your API key
+
+**2. "Google credentials file not found"**
+- Download `credentials.json` from Google Cloud Console
+- Place it in the CalPal root directory
+
+**3. "404 models/gemini-pro is not found"**
+- This is a known issue with Google AI API
+- The system will fall back to simple parsing, which still works
+
+**4. Import errors after restructuring**
+- Make sure you've installed the package: `pip install -e .`
+- Check that you're using the correct import paths
+
+### Getting Help
+
+- Check the [API Documentation](docs/API.md) for detailed usage
+- Look at [examples](examples/) for code samples
+- Open an issue on GitHub for bugs or feature requests
+
+## 🙏 Acknowledgments
+
+- [LangChain](https://langchain.com/) for the agent framework
+- [Google AI](https://ai.google/) for the Gemini Pro model
+- [Google Calendar API](https://developers.google.com/calendar) for calendar integration
