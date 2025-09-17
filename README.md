@@ -14,7 +14,6 @@ CalPal is a command-line intelligent scheduling assistant that uses AI agents to
 CalPal uses a system of specialized agents that work together to complete the scheduling task.
 
 ```mermaid
-
 graph TD
     A[User Input<br>Natural Language Request] --> B(Parser Agent)
     B -- "Structured JSON Data<br>attendees, topic, duration, time_constraint" --> C{Scheduler Agent<br>Orchestrator}
@@ -63,7 +62,7 @@ graph TD
    # Place it in the CalPal directory
    ```
 
-2. **Run your first meeting:**
+3. **Run your first meeting:**
    ```bash
    calpal schedule "Lunch with Alex next Thursday at 1pm"
    ```
