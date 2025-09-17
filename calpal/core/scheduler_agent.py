@@ -21,7 +21,7 @@ class SchedulerAgent:
         print(f"Processing request: '{natural_language_request}'")
         
         # Step 1: Parse the natural language request
-        print("📝 Parsing meeting details...")
+        print("Parsing meeting details...")
         try:
             meeting_request = self.parser_agent.parse(natural_language_request)
             print(f"Parsed meeting: {meeting_request.topic}")
@@ -33,7 +33,7 @@ class SchedulerAgent:
             return False
         
         # Step 2: Find available time slots
-        print("📅 Finding available time slots...")
+        print("Finding available time slots...")
         try:
             available_slots = self.calendar_agent.find_available_slots(
                 duration_minutes=meeting_request.duration_minutes,
@@ -53,10 +53,10 @@ class SchedulerAgent:
             return False
         
         # Step 3: Propose time to user and get confirmation
-        print("\n🎯 Proposed meeting time:")
+        print("\nProposed meeting time:")
         proposed_slot = available_slots[0]  # Use the first available slot
-        print(f"   📅 {proposed_slot.start_time.strftime('%A, %B %d at %I:%M %p')}")
-        print(f"   ⏱️  Duration: {proposed_slot.duration_minutes} minutes")
+        print(f"{proposed_slot.start_time.strftime('%A, %B %d at %I:%M %p')}")
+        print(f"  Duration: {proposed_slot.duration_minutes} minutes")
         
         # In a real CLI, you'd get user input here
         # For now, we'll auto-confirm the first slot
@@ -67,7 +67,7 @@ class SchedulerAgent:
             return False
         
         # Step 4: Create the calendar event
-        print("📝 Creating calendar event...")
+        print("Creating calendar event...")
         try:
             calendar_event = CalendarEvent(
                 summary=meeting_request.topic,
@@ -82,7 +82,7 @@ class SchedulerAgent:
             
             if success:
                 print("Meeting scheduled successfully!")
-                print(f"   📅 {proposed_slot.start_time.strftime('%A, %B %d at %I:%M %p')}")
+                print(f"    {proposed_slot.start_time.strftime('%A, %B %d at %I:%M %p')}")
                 print(f"   👥 Attendees: {', '.join(meeting_request.attendees)}")
                 return True
             else:

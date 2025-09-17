@@ -44,11 +44,11 @@ def test_parsing():
             print(f"\nTest {i}: '{test_case}'")
             try:
                 result = parser.parse(test_case)
-                print(f"  Topic: {result.topic}")
-                print(f"  Attendees: {', '.join(result.attendees)}")
-                print(f"  Duration: {result.duration_minutes} minutes")
-                print(f"  Time constraint: {result.time_constraint}")
-                print("  ✓ Parsed successfully")
+                print(f"Topic: {result.topic}")
+                print(f"Attendees: {', '.join(result.attendees)}")
+                print(f"Duration: {result.duration_minutes} minutes")
+                print(f"Time constraint: {result.time_constraint}")
+                print("Parsed successfully")
             except Exception as e:
                 print(f"  ✗ Failed to parse: {e}")
                 return False
@@ -63,11 +63,11 @@ def test_parsing():
 if __name__ == "__main__":
     success = test_parsing()
     if success:
-        print("\n🎉 CalPal parsing is working perfectly with Google AI!")
+        print("CalPal parsing is working perfectly with Google AI!")
         print("\nTo test full functionality, you'll need to:")
         print("1. Set up Google Calendar API credentials")
         print("2. Run: calpal schedule 'Your meeting request'")
     else:
-        print("\n❌ Parsing tests failed")
+        print(" Parsing tests failed")
         sys.exit(1)
 

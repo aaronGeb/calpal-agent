@@ -115,7 +115,7 @@ def main():
         print()
     
     print("=" * 50)
-    print(f"📊 Test Results: {passed}/{total} tests passed")
+    print(f"Test Results: {passed}/{total} tests passed")
     
     if passed == total:
         print("All tests passed! CalPal is ready to use.")

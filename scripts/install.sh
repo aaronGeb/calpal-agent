@@ -2,48 +2,48 @@
 
 # CalPal Installation Script
 
-echo "🚀 Installing CalPal - The Smart Meeting Scheduler Agent"
+echo "Installing CalPal - The Smart Meeting Scheduler Agent"
 echo "========================================================"
 
 # Check if Python 3 is installed
 if ! command -v python3 &> /dev/null; then
-    echo "❌ Python 3 is required but not installed."
+    echo "Python 3 is required but not installed."
     echo "   Please install Python 3.8 or higher and try again."
     exit 1
 fi
 
-echo "✅ Python 3 found: $(python3 --version)"
+echo "Python 3 found: $(python3 --version)"
 
 # Check if pip is installed
 if ! command -v pip3 &> /dev/null; then
-    echo "❌ pip3 is required but not installed."
+    echo " pip3 is required but not installed."
     echo "   Please install pip3 and try again."
     exit 1
 fi
 
-echo "✅ pip3 found: $(pip3 --version)"
+echo "pip3 found: $(pip3 --version)"
 
 # Install dependencies
 echo ""
-echo "📦 Installing dependencies..."
+echo "Installing dependencies..."
 pip3 install -r requirements.txt
 
 if [ $? -eq 0 ]; then
-    echo "✅ Dependencies installed successfully"
+    echo "Dependencies installed successfully"
 else
-    echo "❌ Failed to install dependencies"
+    echo "Failed to install dependencies"
     exit 1
 fi
 
 # Install CalPal in development mode
 echo ""
-echo "🔧 Installing CalPal..."
+echo "Installing CalPal..."
 pip3 install -e .
 
 if [ $? -eq 0 ]; then
-    echo "✅ CalPal installed successfully"
+    echo "CalPal installed successfully"
 else
-    echo "❌ Failed to install CalPal"
+    echo "Failed to install CalPal"
     exit 1
 fi
 
@@ -54,7 +54,7 @@ python3 test_calpal.py
 
 if [ $? -eq 0 ]; then
     echo ""
-    echo "🎉 Installation complete!"
+    echo "Installation complete!"
     echo ""
     echo "Next steps:"
     echo "1. Set up your Google AI API key:"
@@ -72,7 +72,7 @@ if [ $? -eq 0 ]; then
     echo "4. Or get help:"
     echo "   calpal --help"
 else
-    echo "❌ Tests failed. Please check the errors above."
+    echo "Tests failed. Please check the errors above."
     exit 1
 fi
 
